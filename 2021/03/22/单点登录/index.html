@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>单点登录 | HupingOkk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本篇开始写「单点登录与权限管理」系列的第一部分：单点登录与权限管理本质，这部分主要介绍相关的知识概念、抽象的处理过程、常见的实现框架。通过这部分的介绍，能够对单点登录与权限管理有整体上的了解，对其相关概念、处理流程、常见实现有个基本的认识。 本篇文章介绍下session和cookie，它是登录实现的基础，主要从下面几个方面介绍：  session和cookie基本概念 session的生命周期 c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单点登录">
+<meta property="og:url" content="http://example.com/2021/03/22/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/index.html">
+<meta property="og:site_name" content="HupingOkk">
+<meta property="og:description" content="本篇开始写「单点登录与权限管理」系列的第一部分：单点登录与权限管理本质，这部分主要介绍相关的知识概念、抽象的处理过程、常见的实现框架。通过这部分的介绍，能够对单点登录与权限管理有整体上的了解，对其相关概念、处理流程、常见实现有个基本的认识。 本篇文章介绍下session和cookie，它是登录实现的基础，主要从下面几个方面介绍：  session和cookie基本概念 session的生命周期 c">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f34331a6~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f36d8891~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f365a8bc~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f337693b~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+<meta property="article:published_time" content="2021-03-22T06:13:00.000Z">
+<meta property="article:modified_time" content="2022-03-22T06:14:59.776Z">
+<meta property="article:author" content="Chen Huping">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f34331a6~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp">
+  
+    <link rel="alternate" href="/atom.xml" title="HupingOkk" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HupingOkk</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-单点登录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/03/22/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/" class="article-date">
+  <time class="dt-published" datetime="2021-03-22T06:13:00.000Z" itemprop="datePublished">2021-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      单点登录
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>本篇开始写「单点登录与权限管理」系列的第一部分：单点登录与权限管理本质，这部分主要介绍相关的知识概念、抽象的处理过程、常见的实现框架。通过这部分的介绍，能够对单点登录与权限管理有整体上的了解，对其相关概念、处理流程、常见实现有个基本的认识。</p>
+<p>本篇文章介绍下session和cookie，它是登录实现的基础，主要从下面几个方面介绍：</p>
+<ul>
+<li>session和cookie基本概念</li>
+<li>session的生命周期</li>
+<li>cookie的作用域</li>
+</ul>
+<p>cookie的跨域问题会在后续文章单独介绍。</p>
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><p>大部分系统都需要识别用户的身份，有些功能只有特定的用户能使用，有些功能需要根据用户身份显示不同的内容，一般使用唯一编号标识用户的身份。</p>
+<p>就像我们的身份证，身份证号是每个人唯一的，根据所在的省市区、出生年月、性别等规则生成，我们去政府机构办事时，都需要带着身份证，他们通过身份证验证我们的身份。</p>
+<p>session和cookie主要用来识别登录者身份的，默认通过JSESSIONID唯一编号进行验证。session是在服务端保存的一个数据结构，用来跟踪用户的状态，也可以保存用户相关的一些数据，可以保存在内存、缓存、数据库等存储结构中。cookie是客户端保存用户信息的一种机制。</p>
+<h5 id="servlet-session"><a href="#servlet-session" class="headerlink" title="servlet session"></a>servlet session</h5><p>javax.servlet.http包中是session的主要API接口，主要有以下几种接口：</p>
+<ul>
+<li>HttpSession：实际的session接口定义；</li>
+<li>Listener：session发生一些动作，如创建，设置属性，失效等，会触发一些事件，进行相应的处理；</li>
+<li>Event：当动作触发之后，封装为对应的事件；</li>
+</ul>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f34331a6~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="Session相关接口"></p>
+<p>session相关的接口，一般由应用服务器来实现，比如Tomcat、Resin、Jetty。Session的主要特征：</p>
+<ul>
+<li>可以设置和获取一些属性；</li>
+<li>每个session对应一个编号sessionId，是一次会话的唯一表示；</li>
+<li>session有超时时间，用户长时间无操作，维护的定时器会清除session，保证资源及时释放；</li>
+<li>可以通过调用invalidate方法主动清除session；</li>
+</ul>
+<p>在tomcat中，HttpSession的实现是StandardSession，同时StandardSession会实现自定义的Session接口，它是对HttpSesion一个包装。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f36d8891~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="Tomcat Sesion接口"></p>
+<p>另外，tomcat会实现session的管理和持久化，可随时获取到对应的session，具体实现不在本篇分析，网上有很多文章介绍。</p>
+<h5 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h5><p>cookie是客户端的解决方案，是服务器发给客户端的特殊信息，这些信息以文本文件的方式存放在客户端，后续请求，客户端都会带上这些特殊的信息。</p>
+<p>服务端通过HTTPResponse设置cookie到响应头，发送到客户端，后续客户端自动将cookie信息设置到请求头。下面是我登录百度后的cookie信息：</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f365a8bc~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="百度cookie信息"></p>
+<p>cookie也有失效时间，可在服务端通过cookie.setMaxAge(expiry)进行设置，expiry&#x3D;-1：代表浏览器关闭后，cookie就失效了；expiry&gt;0：代表会将cookie保存到硬盘中，直到设置时间过期才会被浏览器自动删除；expiry&#x3D;0：删除cookie，cookie都会被浏览器给删除。</p>
+<p>另外还有其他几个特性：</p>
+<ul>
+<li>setDomain：设置cookie范围，后面会详细介绍；</li>
+<li>isHttpOnly：是否只是http协议使用。只能在后端通过getCookies()获取，js不能获取；</li>
+<li>每一个cookie文件大小：4kb ， 如果超过4kb浏览器不识别；</li>
+<li>cookie不安全，可能泄露用户信息，浏览器支持禁用cookie操作；</li>
+<li>临时session：默认生命周期，当浏览器关闭时cookie销毁的；</li>
+</ul>
+<h5 id="交互过程"><a href="#交互过程" class="headerlink" title="交互过程"></a>交互过程</h5><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/2/28/161d8311f337693b~tplv-t2oaga2asx-zoom-in-crop-mark:1304:0:0:0.awebp" alt="交互过程图"></p>
+<ol>
+<li>使用浏览器访问服务端页面；</li>
+<li>服务端收到该客户端第一次请求后，会创建一个session，生产一个唯一sessionId；</li>
+<li>同时在响应请求中设置cookie，属性名为jessionid；</li>
+<li>客户端收到后会保存jessionid，再次请求时，会在header中设置，服务端可从请求头中获取；</li>
+<li>服务端验证获取的sessionId是否存在，即可验证是否是同一用户；</li>
+</ol>
+<blockquote>
+<p>当浏览器禁用cookie后，基于cookie的session将不能正常工作，每次都将创建一个新的session，可通过url重写传递jsessionid。</p>
+</blockquote>
+<h4 id="session的生命周期"><a href="#session的生命周期" class="headerlink" title="session的生命周期"></a>session的生命周期</h4><p>session存储在服务器端，session在用户第一次访问时创建，访问jsp、servlet等程序时才会创建Session，只访问html、image等静态资源并不会创建，可调用request.getSession(true)强制生成Session。</p>
+<p>服务器会把长时间没有活动的Session从内存中清除，tomcat中session的默认失效时间为30分钟，可调用调用session的invalidate方法强制清楚。</p>
+<p>另外，我们可以自己实现session生命周期的管理，以满足特定的业务需求，比如后续要讲的单点登录、分布式session等，tomcat可提供了相应扩展，后续文章会介绍。</p>
+<h4 id="cookie的作用域"><a href="#cookie的作用域" class="headerlink" title="cookie的作用域"></a>cookie的作用域</h4><p>创建cookie时，需要设置domain，有多级域名时，可以控制cookie的作用域。如果网站请求量很大，设置的cookie作用域不当，会浪费很多流量。</p>
+<p>下面举例说明，比如有三级域名support.kefu.mi.com，其中，mi.com是一级域名，kefu.mi.com是二级域名。</p>
+<p>在3类域名下进行cookie设置，分别设置不同的domain，看看访问各级域名时cookie的有效性。当domain设置为空时，domain默认为当前域名。</p>
+<h5 id="在一级域名mi-com下设置cookie"><a href="#在一级域名mi-com下设置cookie" class="headerlink" title="在一级域名mi.com下设置cookie"></a>在一级域名mi.com下设置cookie</h5><table>
+<thead>
+<tr>
+<th>domain参数</th>
+<th>访问一级</th>
+<th>访问二级</th>
+<th>访问三级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>mi.com</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>kefu.mi.com</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>mcc.kefu.mi.com</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody></table>
+<p>当domain为一级域名时，一级域名、包括其下的子域名都可以接收到cookie。但是domain参数设置其子域名时，所有域名就接收不到了，包括那个子域名。</p>
+<h5 id="在二级域名kefu-mi-com下设置cookie"><a href="#在二级域名kefu-mi-com下设置cookie" class="headerlink" title="在二级域名kefu.mi.com下设置cookie"></a>在二级域名kefu.mi.com下设置cookie</h5><table>
+<thead>
+<tr>
+<th>domain参数</th>
+<th>访问一级</th>
+<th>访问二级</th>
+<th>访问三级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>mi.com</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>kefu.mi.com</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>mcc.kefu.mi.com</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody></table>
+<p>当domain为自身域名时，其父域名无法接收到cookie，其本身与其子域名可以接收到cookie。而设置其子域名或其他域名时，所有域名都接收不到cookie。</p>
+<h5 id="在三级域名mcc-kefu-mi-com下设置cookie"><a href="#在三级域名mcc-kefu-mi-com下设置cookie" class="headerlink" title="在三级域名mcc.kefu.mi.com下设置cookie"></a>在三级域名mcc.kefu.mi.com下设置cookie</h5><table>
+<thead>
+<tr>
+<th>domain参数</th>
+<th>访问一级</th>
+<th>访问二级</th>
+<th>访问三级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>mi.com</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>kefu.mi.com</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>mcc.kefu.mi.com</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+</tbody></table>
+<p>可以得出结论：domain参数可以设置父域名以及自身，但不能设置其它域名，包括子域名，否则cookie不起作用。</p>
+<p><strong>系列索引：</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903567803826190" title="https://juejin.cn/post/6844903567803826190">session和cookie介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903568260988941" title="https://juejin.cn/post/6844903568260988941">HTTP重定向</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903568722395144" title="https://juejin.cn/post/6844903568722395144">单点登录介绍</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903573705211918" title="https://juejin.cn/post/6844903573705211918">cookie安全问题</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903574271426574" title="https://juejin.cn/post/6844903574271426574">权限管理介绍</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/03/22/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/" data-id="cl11qsw6m0005buoqdolo9d3a" data-title="单点登录" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/26/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/22/V2EX/">V2EX</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/26/%E4%B9%8C%E6%96%B9%E7%A7%B0%E5%87%BB%E9%80%80%E4%BF%84%E5%86%9B%E5%AF%B9%E5%9F%BA%E8%BE%85%E4%B8%BB%E5%B9%B2%E9%81%93%E7%9A%84%E8%BF%9B%E6%94%BB%E7%83%AD/">世界地图</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/26/chenhuping/">chenhuping</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/26/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/03/22/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/">单点登录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Chen Huping<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
