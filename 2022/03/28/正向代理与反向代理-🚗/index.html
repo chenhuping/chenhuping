@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>正向代理与反向代理 🚗 | HupingOkk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="代理的英文叫做 _Proxy_，是计算机中的常用软件。 简单来说，代理的功能犹如它的名字所示：代替某人来处理某事。 常见的代理分两种，正向代理和反向代理。不管哪种代理，它们都位于客户端和服务器之间，将我们传统的 客户端 &lt;-&gt; 服务器 通信变成了 客户端 &lt;-&gt; 代理 &lt;-&gt; 服务器 通信。 正向代理 🚗正向代理用于代理客户端，此时在服务器看来，代理就是客户端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正向代理与反向代理 🚗">
+<meta property="og:url" content="http://example.com/2022/03/28/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-%F0%9F%9A%97/index.html">
+<meta property="og:site_name" content="HupingOkk">
+<meta property="og:description" content="代理的英文叫做 _Proxy_，是计算机中的常用软件。 简单来说，代理的功能犹如它的名字所示：代替某人来处理某事。 常见的代理分两种，正向代理和反向代理。不管哪种代理，它们都位于客户端和服务器之间，将我们传统的 客户端 &lt;-&gt; 服务器 通信变成了 客户端 &lt;-&gt; 代理 &lt;-&gt; 服务器 通信。 正向代理 🚗正向代理用于代理客户端，此时在服务器看来，代理就是客户端">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-28T03:16:04.000Z">
+<meta property="article:modified_time" content="2022-03-28T03:16:54.577Z">
+<meta property="article:author" content="Chen Huping">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="HupingOkk" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HupingOkk</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-正向代理与反向代理-🚗" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/28/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-%F0%9F%9A%97/" class="article-date">
+  <time class="dt-published" datetime="2022-03-28T03:16:04.000Z" itemprop="datePublished">2022-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      正向代理与反向代理 🚗
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>代理的英文叫做 _Proxy_，是计算机中的常用软件。</p>
+<p>简单来说，代理的功能犹如它的名字所示：代替某人来处理某事。</p>
+<p>常见的代理分两种，正向代理和反向代理。不管哪种代理，它们都位于客户端和服务器之间，将我们传统的 <code>客户端 &lt;-&gt; 服务器</code> 通信变成了 <code>客户端 &lt;-&gt; 代理 &lt;-&gt; 服务器</code> 通信。</p>
+<h2 id="正向代理-🚗"><a href="#正向代理-🚗" class="headerlink" title="正向代理 🚗"></a>正向代理 🚗</h2><p>正向代理用于代理客户端，此时在服务器看来，代理就是客户端，服务器不知道真正客户端的存在。</p>
+<p>一般情况下，代理和客户端位于一个内网中，<code>(客户端 &lt;-&gt; 代理) &lt;-&gt; 服务器</code>。客户端不需要直接将请求发给服务器，而是发给代理，由代理代为请求服务器并返回结果。</p>
+<p>看起来似乎是多了一道手续，没什么好处，但是实际上，正向代理有很多用处：</p>
+<ul>
+<li><p>突破限制。</p>
+<p>比如有五台服务器，位于一个内网中，但是只有一台可以访问公网。那么此时通过配置这台服务器作为正向代理，其他四台服务器便也都可以访问公网，这个场景在云服务器中很常见。</p>
+<p>再比如我们的科学上网软件，实际上也是一个正向代理。由于我们的计算机无法直接访问敏感网站，但是代理服务器可以，而我们的计算机访问代理服务器又是没问题的。因此，通过使用代理服务器，我们便可以间接访问到我们感兴趣的网站。</p>
+</li>
+<li><p>流量控制与流量统计。</p>
+<p>由于所有的流量都经过代理，通过配置代理，我们可以对流量进行任意控制。比如，不允许访问淘宝等，很多公司会对员工的网络访问进行限制，便是通过正向代理实现。</p>
+<p>除了控制之外，使用正向代理也可以对流量进行统计。通过解析代理的访问日志，使用一些类似 <a target="_blank" rel="noopener" href="https://github.com/eldy/awstats">awstats</a> 的工具，便可以得到流量的详细统计信息。</p>
+</li>
+<li><p>提升性能。</p>
+<p>正向代理可以缓存经常被访问的网站，从而大幅提升访问速度。</p>
+</li>
+</ul>
+<h2 id="反向代理-🚀"><a href="#反向代理-🚀" class="headerlink" title="反向代理 🚀"></a>反向代理 🚀</h2><p>反向代理用于代理服务器，此时在客户端看来，代理就是服务器，客户端不知道真正服务器的存在。</p>
+<p>一般情况下，代理和服务器位于一个内网中，<code>客户端 &lt;-&gt; (代理 &lt;-&gt; 服务器)</code>。服务器不需要直接和客户端沟通，而是通过代理，由代理接收客户端的请求，再发送给服务器。</p>
+<p>反向代理有如下几个用处：</p>
+<ul>
+<li><p>突破限制。</p>
+<p>比如内网中的某个服务器，如果想要在公网访问，我们可以配置内网中拥有公网IP的机器作为反向代理，从而实现对内网服务的访问。</p>
+</li>
+<li><p>负载均衡。</p>
+<p>我们可以部署多台服务器，配置代理将请求转发给不同的服务器。这里有很多算法可以使用，比如最简单的轮流转发 (Round Robin)。这样，当负载增大的时候，客户端无需做任何修改，服务端通过简单的增加服务器便可以应对。</p>
+<p>负载均衡的另一个好处是可以实现容灾容错。如果某台服务器宕机了，代理服务器会将请求转发到其他服务器上，客户端不会受到任何影响。</p>
+</li>
+<li><p>访问加速。</p>
+<p>对于某些大型服务，他们的服务器遍布各地，通过使用反向代理，当请求到来时，代理可以将请求转发给最近的服务器，从而让用户在最短时间内获得响应，这一点其实和 CDN 的工作方式是一样的。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/28/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-%F0%9F%9A%97/" data-id="cl1a533v00003e7oq6kcxfzd7" data-title="正向代理与反向代理 🚗" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/22/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">单点登录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/28/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-%F0%9F%9A%97/">正向代理与反向代理 🚗</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/22/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/">单点登录</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/22/V2EX/">V2EX</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Chen Huping<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
