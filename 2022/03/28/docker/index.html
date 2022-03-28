@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>docker | HupingOkk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="问题描述创建容器时，提示no space left on device 问题出现的环境背景及自己尝试过哪些方法操作系统：windowsdocker 容器配置：  尝试过的方式：https:&#x2F;&#x2F;blog.csdn.net&#x2F;QQ40147...无法得到解决，只是清理了Containers的空间，Local Volumes空间还是不足。docker system dfdocker system prun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker">
+<meta property="og:url" content="http://example.com/2022/03/28/docker/index.html">
+<meta property="og:site_name" content="HupingOkk">
+<meta property="og:description" content="问题描述创建容器时，提示no space left on device 问题出现的环境背景及自己尝试过哪些方法操作系统：windowsdocker 容器配置：  尝试过的方式：https:&#x2F;&#x2F;blog.csdn.net&#x2F;QQ40147...无法得到解决，只是清理了Containers的空间，Local Volumes空间还是不足。docker system dfdocker system prun">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/pasted-4.png">
+<meta property="article:published_time" content="2022-03-28T07:30:41.000Z">
+<meta property="article:modified_time" content="2022-03-28T07:33:13.292Z">
+<meta property="article:author" content="Chen Huping">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/pasted-4.png">
+  
+    <link rel="alternate" href="/atom.xml" title="HupingOkk" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">HupingOkk</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-docker" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/03/28/docker/" class="article-date">
+  <time class="dt-published" datetime="2022-03-28T07:30:41.000Z" itemprop="datePublished">2022-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      docker
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>创建容器时，提示no space left on device</p>
+<h3 id="问题出现的环境背景及自己尝试过哪些方法"><a href="#问题出现的环境背景及自己尝试过哪些方法" class="headerlink" title="问题出现的环境背景及自己尝试过哪些方法"></a>问题出现的环境背景及自己尝试过哪些方法</h3><p>操作系统：windows<br>docker 容器配置：</p>
+<p><img src="/images/pasted-4.png" alt="upload successful"></p>
+<p>尝试过的方式：<br><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=SkHTajvvbt1DlZA023sFLw==.mSWcbJAaybABrC3sfdo38NksczilRZgVgfZiDUkzZ14Mcbgut3FUZbgx3wcVl3NLUyJ8c2hUcpdYnNxcXO5aDg==">https://blog.csdn.net/QQ40147...</a><br>无法得到解决，只是清理了Containers的空间，Local Volumes空间还是不足。<br>docker system df<br>docker system prune</p>
+<p><a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=9yNlehE/1w9O2Y5TFPiVBw==.ZGNZwh1/O/Tle06jij+kcnMqRKU93onFo5IKOHZkdyq5lcq5WN/XEYaLH3A5s8vN0j4CgMixo9uDwJIsIUrg3V+No60nRQMIkWd1z9tRECGkwRYBEz9gJR5uBo+QeUIiEBiMUr7mNlTQP21kyt+AtA==">https://stackoverflow.com/que...</a><br>I had the same problem on Windows. One of this two settings should solve this problem:<br>Increase Memory that Docker is using. If is it 2GB, add more<br>Increase “Disk image max size” - initially is 60, move it to 80 GB<br>This should be enough, but depends on complexity of what you are building. In some cases increase of Swap would be needed. The initial Swap of Docker is 1024 MB<br>Thanks<br>根据以上的解决思路，不只是增加磁盘空间，也可能是内存不够，两者都增加。</p>
+<p>docker system df—–&gt;docker system prune</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/03/28/docker/" data-id="cl1ae8mo500015noqdfp93wql" data-title="docker" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/28/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-%F0%9F%9A%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">正向代理与反向代理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/28/docker/">docker</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/28/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86-%F0%9F%9A%97/">正向代理与反向代理</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/22/%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/">单点登录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Chen Huping<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
